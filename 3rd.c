@@ -11,13 +11,13 @@ scanf("%d",&n);
 for(i=0;i<n;i++)
 {
 printf("\tEnter the burst time of %d process :",i+1);
-scanf(" %d",&bur[i]);
+scanf(" %d",bur[i]);
 
 }
 for(i=0;i<n;i++)
 {
 printf("\tEnter the arrival time of %d process :",i+1);
-scanf(" %d",&arr[i]);
+scanf(" %d",arr[i]);
 }
  
 /*Sorting According to Arrival Time*/
@@ -49,7 +49,7 @@ btime=btime+bt[j];
 min=bur[k];
 for(i=k;i<n;i++)
 {
-if (btime>=arr[i] && bur[i]<min)
+if (btime>=arr[i] || bur[i]<min)
 {
 temp=pr[k];
 pr[k]=pr[i];
@@ -62,35 +62,20 @@ bur[k]=bur[i];
 bur[i]=temp;
 }
 }
-k++;
+
 }
-wait[0]=0;
-for(i=1;i<n;i++)
-{
-sum=sum+bur[i-1];
-wait[i]=sum-arr[i];
-wsum=wsum+wait[i];
-}
+
  
-wavg=(wsum/n);
-for(i=0;i<n;i++)
-{
-ta=ta+bur[i];
-tat[i]=ta-arr[i];
-tsum=tsum+tat[i];
-}
- 
-tavg=(tsum/n);
+
  
 printf("************************");
 printf("\n RESULT:-");
 printf("\nProcess\t Burst\t Arrival\t Waiting\t Turn-around" );
 for(i=0;i<n;i++)
 {
-printf("\n p%d\t %d\t %d\t\t %d\t\t\t%d",pr[i],bur[i],arr[i],wait[i],tat[i]);
+printf("p%d %d %d %d%d",pr[i],bur[i],arr[i],wait[i],tat[i]);
 }
  
-printf("\n\nAVERAGE WAITING TIME : %f",wavg);
-printf("\nAVERAGE TURN AROUND TIME : %f",tavg);
+
 return 0;
 }
